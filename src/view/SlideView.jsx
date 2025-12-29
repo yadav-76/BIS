@@ -356,8 +356,41 @@ const SlideView = ({ data }) => {
                 </motion.div>
 
             </div>
-        )}
+        )},
+        {/* LAYOUT: CENTERED RECOMMENDATIONS */}
+        {data.type === 'centered-recommendations' && (
+            <div className="cr-container">
+                <motion.div 
+                    className="cr-header"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                >
+                    <span className="cr-tag">{data.title}</span>
+                    <h1 className="cr-main-heading">{data.heading}</h1>
+                </motion.div>
 
+                <div className="cr-list">
+                    {data.items.map((item, idx) => (
+                        <motion.div 
+                            key={idx}
+                            className="cr-item"
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 * idx }}
+                            style={{ '--line-color': item.color }}
+                        >
+                            <div className="cr-icon-box" style={{ background: item.color }}>
+                                {item.icon}
+                            </div>
+                            <div className="cr-text-box">
+                                <h3 style={{ color: item.color }}>{item.title}</h3>
+                                <p>{item.desc}</p>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        )}
       </motion.div>
     </AnimatePresence>
   );
